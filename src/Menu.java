@@ -34,6 +34,7 @@ public class Menu {
 
     public void menu(){
         System.out.println("""
+                Do you want to:
                 1. Start
                 2. Log in
                 3. Exit
