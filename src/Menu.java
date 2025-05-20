@@ -29,5 +29,44 @@ public class Menu {
                 \033[0;37m\033[01You are the tree.
                 And you are still growing.\033[m
                 """);
+        menu();
+    }
+
+    public void menu(){
+        System.out.println("""
+                1. Start
+                2. Log in
+                3. Exit
+                """);
+        int pilih = scan.nextInt();
+        switch (pilih) {
+            case 1 -> start();
+            case 2 -> login();
+            case 3 -> {
+                System.out.println("Exiting the program...");
+                System.exit(0);
+            }
+            default -> System.out.println("Invalid choice. Please try again.");
+        }
+    }
+
+    public void start(){
+        System.out.println("Hi! Welcome to Preet. Let's get started.");
+        System.out.println("Please enter your username:");
+        String username = scan.next();
+        System.out.println("Please enter your password:");
+        String password = scan.next();
+        //pake hashmap?
+    }
+
+    public void login(){
+        System.out.println("Please enter your username:");
+        String username = scan.next();
+        System.out.println("Please enter your password:");
+        String password = scan.next();
+        // Here you would typically check the username and password against a database or a list of users
+        // For now, we'll just print them out
+        System.out.println("Username: " + username);
+        System.out.println("Password: " + password);
     }
 }
