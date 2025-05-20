@@ -34,7 +34,11 @@ public class Menu {
 
     public void menu(){
         System.out.println("""
-                Do you want to:
+                ==========================
+                        🌳Preet🌳
+                ==========================
+                Welcome to Preet! This is a place where you can grow and learn.
+                You can choose to start your journey or log in if you already have an account.
                 1. Start
                 2. Log in
                 3. Exit
