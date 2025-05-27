@@ -33,4 +33,7 @@ public abstract class Pet {
         this.sentence = sentence;
     }
 
+    public void interact() {
+        System.out.println(sentence);
+    }
 }
