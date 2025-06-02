@@ -38,20 +38,28 @@ public class Menu {
     }
 
     public void LogReg() {
-        System.out.println("\n\033[1mRoots and Branches\033[0m");
-        System.out.println("1. \033[3mTake root\033[0m (Register)");
-        System.out.println("2. \033[3mReturn to your grove\033[0m (Login)");
-        System.out.println("3. \033[3mLet the wind carry you away\033[0m (Exit)");
-        System.out.print("\nChoose your path: ");
-        String choice = s.nextLine();
+        while (currentUser == null) {
+            System.out.println("\n\033[1mRoots and Branches\033[0m");
+            System.out.println("1. \033[3mTake root\033[0m (Register)");
+            System.out.println("2. \033[3mReturn to your grove\033[0m (Login)");
+            System.out.println("3. \033[3mLet the wind carry you away\033[0m (Exit)");
+            System.out.print("\nChoose your path: ");
 
-        if (choice.equals("1")) {
-            register();
-        } else if (choice.equals("2")) {
-            login();
-        } else {
-            System.out.println("Invalid choice.");
-            LogReg();
+            String choice = s.nextLine();
+
+            switch (choice) {
+                case "1":
+                    register();
+                    break;
+                case "2":
+                    login();
+                    break;
+                case "3":
+                    System.out.println("\nMay your roots find nourishment elsewhere.");
+                    System.exit(0);
+                default:
+                    System.out.println("\nThe wind whispers of unclear choices...");
+            }
         }
     }
 
