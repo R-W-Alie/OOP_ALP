@@ -1,12 +1,15 @@
+import java.util.Random;
+
 public abstract class Pet {
     protected String name;
     protected int hp;
-    protected String sentence;
+    protected String[] sentences;
+    private Random rand = new Random();
 
-    public Pet(String name, int hp, String sentence) {
+    public Pet(String name, int hp, String[] sentences) {
         this.name = name;
         this.hp = hp;
-        this.sentence = sentence;
+        this.sentences = sentences;
     }
 
     public String getName() {
@@ -25,15 +28,20 @@ public abstract class Pet {
         this.hp = hp;
     }
 
-    public String getSentence() {
-        return this.sentence;
+    public String[] getSentences() {
+        return this.sentences;
     }
 
-    public void setSentence(String sentence) {
-        this.sentence = sentence;
+    public void setSentences(String[] sentences) {
+        this.sentences = sentences;
     }
 
     public void interact() {
-        System.out.println(sentence);
+        if (sentences != null && sentences.length > 0) {
+            int index = rand.nextInt(sentences.length); 
+            System.out.println(sentences[index]);
+        } else {
+            System.out.println("...");
+        }
     }
 }
