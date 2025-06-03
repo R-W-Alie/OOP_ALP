@@ -1,10 +1,10 @@
 public abstract class Quest {
     protected String description;
-    protected int plushp;
+    protected int pluspoint;
 
     public Quest(String description, int plushp) {
         this.description = description;
-        this.plushp = plushp;
+        this.pluspoint = pluspoint;
     }
 
     public abstract void complete(User user);
