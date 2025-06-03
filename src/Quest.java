@@ -1,18 +1,14 @@
 public abstract class Quest {
-    protected String name;
     protected String description;
+    protected int plushp;
 
-    public Quest(String name, String description) {
-        this.name = name;
+    public Quest(String description, int plushp) {
         this.description = description;
+        this.plushp = plushp;
     }
 
     public abstract void complete(User user);
-
-    public String getName() {
-        return name;
-    }
-
+    
     public String getDescription() {
         return description;
     }

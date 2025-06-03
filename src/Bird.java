@@ -12,7 +12,7 @@ public class Bird extends Pet {
 
     @Override
     public void interact() {
-        System.out.print("🐦 ");
+        System.out.print("🦜 ");
         super.interact();
     }
 }
