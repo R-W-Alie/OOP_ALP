@@ -67,6 +67,22 @@ public class Menu {
         }
         showSanctuary();
     }
+    while () {
+            //pertanyaa
+            //jwban
+
+            switch () {
+                case "1":
+                    break;
+                case "2":
+                    break;
+                case "3":
+                    System.out.println("\nMay your roots find nourishment elsewhere.");
+                    System.exit(0);
+                default:
+                    System.out.println("\nThe wind whispers of unclear choices...");
+            }
+        }
 
     private void register() {
         System.out.println("\n\033[1mTake Root in This Soil\033[0m");

@@ -64,30 +64,163 @@ public class Menu {
     }
 
     private void register() {
-        System.out.print("Choose a username: ");
-        String username = s.nextLine();
-        System.out.print("Choose a password: ");
-        String password = s.nextLine();
+        System.out.println("\n\033[1mTake Root in This Soil\033[0m");
+        String username;
 
-        User newUser = new User(username, password);
+        while (true) {
+            System.out.print("\nChoose your name (3-12 characters): ");
+            username = s.nextLine().trim();
+
+            if (username.length() < 3 || username.length() > 12) {
+                System.out.println("⚠️ A name must be strong enough to hold, but light enough to grow.");
+                continue;
+            }
+
+            if (UserManager.loadFromFile(username) != null) {
+                System.out.println("🌳 This name already grows in our grove. Choose another.");
+            } else {
+                break;
+            }
+        }
+
+        String password;
+        while (true) {
+            System.out.print("Choose a password (min 4 characters): ");
+            password = s.nextLine().trim();
+            if (password.length() < 4) {
+                System.out.println("Your roots need a bit more strength.");
+            } else {
+                break;
+            }
+        }
+
+        int level;
+        level = 1;
+
+        User newUser = new User(username, password, level);
         UserManager.saveToFile(newUser);
-
-        System.out.println("Account created! Welcome, " + username + "!");
+        System.out.println("\nAccount created! Welcome, " + username + "!");
     }
 
     private void login() {
         System.out.print("Username: ");
-        String username = s.nextLine();
+        String username = s.nextLine().trim();
+
         System.out.print("Password: ");
-        String password = s.nextLine();
+        String password = s.nextLine().trim();
 
-        User loaded = UserManager.loadFromFile(username);
+        User user = UserManager.loadFromFile(username);
 
-        if (loaded != null && loaded.getPassword().equals(password)) {
-            System.out.println("Welcome back, " + username + "!");
+        if (user == null) {
+            System.out.println("User not found or file corrupted.");
+        } else if (!user.getPassword().equals(password)) {
+            System.out.println("Incorrect password.");
         } else {
-            System.out.println("Login failed. Try again.");
-            LogReg();
+            System.out.println("Login successful! Welcome back, " + user.getUsername() + "!");
+            mainmenu(user);
         }
     }
+
+    public void mainmenu(User user) {
+        System.out.println();
+        System.out.println("=== Main Menu ===");
+        System.out.println("1. Do Quest\n2. View Tree\n3. View Animals\n4. Play Memory Game\n 0. Exit");
+        int choice = -1;
+        while (choice != 0) {
+            do {
+                System.out.print("Choose an option: ");
+                try {
+                    choice = s.nextInt();
+                } catch (InputMismatchException e) {
+                    System.out.println("Invalid input. Please enter a number.");
+                    s.next();
+                    choice = -1;
+                }
+            } while (choice < 0 || choice > 4);
+            switch (choice) {
+                case 1:
+                    doQuest(user);
+                    break;
+                case 2:
+                    viewTree(user);
+                    break;
+                case 3:
+                    viewAnimals(user);
+                case 4:
+                    playMemoryGame(user);
+                    break;
+                case 0:
+                    System.out.println("\nMay your roots find nourishment elsewhere.");
+                    System.exit(0);
+                default:
+                    System.out.println("\nThe wind whispers of unclear choices...");
+            }
+        }
+    }
+
+    public void playMemoryGame(User user) {
+        for (int i = 0; i < 99; i++) {
+            System.out.println();
+        }
+    }
+
+    public void viewAnimals(User user) {
+        // Display animals yang ada di grove
+        System.out.println("Here are the animals in your grove:");
+        // display emoji pake intejer and animalnya
+        // jadi tambah string di pet trs namain emoji
+    }
+
+    public void viewTree(User user) {
+        // Display treenya i still need to draw
+    }
+
+    public void doQuest(User user) {
+        // ini dia display quest yang bakal dilakukan
+    }
 }
+
+// public void menu(){
+// System.out.println("""
+// ==========================
+// 🌳Preet🌳
+// ==========================
+// Welcome to Preet! This is a place where you can grow and learn.
+// You can choose to start your journey or log in if you already have an
+// account.
+// 1. Start
+// 2. Log in
+// 3. Exit
+// """);
+// int pilih = s.nextInt();
+// switch (pilih) {
+// case 1 -> start();
+// case 2 -> login();
+// case 3 -> {
+// System.out.println("Exiting the program...");
+// System.exit(0);
+// }
+// default -> System.out.println("Invalid choice. Please try again.");
+// }
+// }
+
+// public void start(){
+// System.out.println("Hi! Welcome to Preet. Let's get started.");
+// System.out.println("Please enter your username:");
+// String username = s.next();
+// System.out.println("Please enter your password:");
+// String password = scan.next();
+// //pake hashmap?
+// }
+
+// public void login(){
+// System.out.println("Please enter your username:");
+// String username = s.next();
+// System.out.println("Please enter your password:");
+// String password = s.next();
+// // Here you would typically check the username and password against a
+// database or a list of users
+// // For now, we'll just print them out
+// System.out.println("Username: " + username);
+// System.out.println("Password: " + password);
+// }

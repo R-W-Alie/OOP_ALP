@@ -1,36 +1,44 @@
 import java.io.*;
 
 public class UserManager {
-    private static final String USER_DATA = "users";
+    private static final String USER_FOLDER = "users";
 
     static {
-        File folder = new File(USER_DATA);
+        File folder = new File(USER_FOLDER);
         if (!folder.exists()) {
-            folder.mkdir();
+            if (folder.mkdir()) {
+                System.out.println("Created 'users/' folder.");
+            } else {
+                System.err.println("Failed to create folder.");
+            }
         }
     }
 
     public static void saveToFile(User user) {
-        String fileName = USER_DATA + "/" + user.getUsername() + ".txt";
-        try (FileWriter writer = new FileWriter(fileName)) {
+        File file = new File(USER_FOLDER + "/" + user.getUsername() + ".txt");
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             writer.write(user.getUsername() + "\n");
             writer.write(user.getPassword() + "\n");
             writer.write(user.getLevel() + "\n");
         } catch (IOException e) {
-            System.out.println("Error saving user: " + e.getMessage());
+            System.err.println("Failed to save user data:");
+            e.printStackTrace();
         }
     }
 
     public static User loadFromFile(String username) {
-        String fileName = USER_DATA + "/" + username + ".txt";
-        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+        File file = new File(USER_FOLDER + "/" + username + ".txt");
+        if (!file.exists())
+            return null;
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String uname = reader.readLine();
             String pass = reader.readLine();
             int level = Integer.parseInt(reader.readLine());
-
-            return new User(uname, pass);
-        } catch (IOException e) {
-            System.out.println("User not found or file error.");
+            return new User(uname, pass, level);
+        } catch (Exception e) {
+            System.err.println("Error loading user:");
+            e.printStackTrace();
             return null;
         }
     }

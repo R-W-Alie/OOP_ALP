@@ -1,12 +1,12 @@
 public class User {
     private String username;
-    private String password;
+    private String pass;
     private int level;
 
-    public User(String username, String password) {
+    public User(String username, String pass, int level) {
         this.username = username;
-        this.password = password;
-        this.level = 1; // default
+        this.pass = pass;
+        this.level = 1;
     }
 
     public String getUsername() {
@@ -14,7 +14,7 @@ public class User {
     }
 
     public String getPassword() {
-        return password;
+        return pass;
     }
 
     public int getLevel() {
