@@ -123,7 +123,7 @@ public class Menu {
     public void mainmenu(User user) {
         System.out.println();
         System.out.println("=== Main Menu ===");
-        System.out.println("1. Do Quest\n2. View Tree\n3. View Animals\n4. Play Memory Game\n 0. Exit");
+        System.out.println("1. Do Quest\n2. View Tree\n3. View Animals\n4. Play Memory Game\n0. Exit");
         int choice = -1;
         while (choice != 0) {
             do {
@@ -168,6 +168,41 @@ public class Menu {
         System.out.println("Here are the animals in your grove:");
         // display emoji pake intejer and animalnya
         // jadi tambah string di pet trs namain emoji
+        System.out.println();
+        System.out.println("=== MY ANIMALSS ===");
+        if (user.pets.isEmpty()) {
+            System.out.println("\nYou feel a presence missing beside you...");
+            createOrChoosePet(user);
+        }
+        for (int i = 0; i < user.pets.size(); i++) {
+            Pet pet = user.pets.get(i);
+            System.out.print((i + 1) + ". " + pet.getName() + " ");
+        }
+    }
+
+    public void createOrChoosePet(User user) {
+        Pet newPet = null;
+        System.out.println("\nChoose a companion for your journey:");
+        System.out.println("1. Frog 🐸");
+        System.out.println("2. Bird 🦜");
+        System.out.print("Enter your choice: ");
+        int choice = s.nextInt();
+
+        switch (choice) {
+            case 1:
+                newPet = new Frog("Frog", 10);
+                break;
+            case 2:
+                newPet = new Bird("Bird", 10);
+                break;
+            default:
+                System.out.println("Invalid choice. No pet was created.");
+                return;
+        }
+
+        user.pets.add(newPet);
+        UserManager.saveToFile(user);
+        System.out.println("🎉 A new friend joins your grove: " + newPet.getName() + "!");
     }
 
     public void viewTree(User user) {
@@ -178,48 +213,3 @@ public class Menu {
         // ini dia display quest yang bakal dilakukan
     }
 }
-
-// public void menu(){
-// System.out.println("""
-// ==========================
-// 🌳Preet🌳
-// ==========================
-// Welcome to Preet! This is a place where you can grow and learn.
-// You can choose to start your journey or log in if you already have an
-// account.
-// 1. Start
-// 2. Log in
-// 3. Exit
-// """);
-// int pilih = s.nextInt();
-// switch (pilih) {
-// case 1 -> start();
-// case 2 -> login();
-// case 3 -> {
-// System.out.println("Exiting the program...");
-// System.exit(0);
-// }
-// default -> System.out.println("Invalid choice. Please try again.");
-// }
-// }
-
-// public void start(){
-// System.out.println("Hi! Welcome to Preet. Let's get started.");
-// System.out.println("Please enter your username:");
-// String username = s.next();
-// System.out.println("Please enter your password:");
-// String password = scan.next();
-// //pake hashmap?
-// }
-
-// public void login(){
-// System.out.println("Please enter your username:");
-// String username = s.next();
-// System.out.println("Please enter your password:");
-// String password = s.next();
-// // Here you would typically check the username and password against a
-// database or a list of users
-// // For now, we'll just print them out
-// System.out.println("Username: " + username);
-// System.out.println("Password: " + password);
-// }
