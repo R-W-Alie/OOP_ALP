@@ -14,4 +14,5 @@ public abstract class Quest {
     public String getDescription() {
         return description;
     }
+    public abstract int getReward();
 }

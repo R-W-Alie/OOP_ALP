@@ -180,36 +180,65 @@ public class Menu {
         }
     }
 
-    public void createOrChoosePet(User user) {
-        Pet newPet = null;
-        System.out.println("\nChoose a companion for your journey:");
-        System.out.println("1. Frog 🐸");
-        System.out.println("2. Bird 🦜");
-        System.out.print("Enter your choice: ");
-        int choice = s.nextInt();
-
-        switch (choice) {
-            case 1:
-                newPet = new Frog("Frog", 10);
-                break;
-            case 2:
-                newPet = new Bird("Bird", 10);
-                break;
-            default:
-                System.out.println("Invalid choice. No pet was created.");
-                return;
-        }
-
-        user.pets.add(newPet);
-        UserManager.saveToFile(user);
-        System.out.println("🎉 A new friend joins your grove: " + newPet.getName() + "!");
-    }
-
     public void viewTree(User user) {
         // Display treenya i still need to draw
     }
 
     public void doQuest(User user) {
-        // ini dia display quest yang bakal dilakukan
+        int playerLevel = user.getLevel();
+        List<String> dailyQuests = DoQuest.get5QuestsByLevel(playerLevel); // Make sure this exists
+        Set<Integer> completedIndices = new HashSet<>();
+        System.out.println("\n🌿 Your 5 quests for today:");
+
+        while (completedIndices.size() < dailyQuests.size()) {
+            System.out.println("\nAvailable quests:");
+            for (int i = 0; i < dailyQuests.size(); i++) {
+                if (!completedIndices.contains(i)) {
+                    System.out.println((i + 1) + ". " + dailyQuests.get(i));
+                }
+            }
+
+            System.out.print("Choose a quest number to complete (or 0 to quit): ");
+            String input = s.nextLine().trim(); // use the class-level Scanner `s`
+
+            int choice;
+            try {
+                choice = Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                System.out.println("❌ Invalid input. Please enter a number.");
+                continue;
+            }
+
+            if (choice == 0) {
+                System.out.println("🌙 Quitting quests for today.");
+                break;
+            }
+
+            if (choice < 1 || choice > dailyQuests.size()) {
+                System.out.println("❌ Please choose a number between 1 and " + dailyQuests.size());
+                continue;
+            }
+
+            int questIndex = choice - 1;
+
+            if (completedIndices.contains(questIndex)) {
+                System.out.println("❌ You already completed that quest today. Choose another.");
+                continue;
+            }
+
+            completedIndices.add(questIndex);
+            System.out.println("✅ Quest completed: " + dailyQuests.get(questIndex));
+
+            int reward = 1;
+            user.increaseLevel(reward);
+            System.out.println("🌟 Growth achieved! +" + reward + " level(s). Current level: " + user.getLevel());
+
+            UserManager.saveToFile(user);
+        }
+
+        if (completedIndices.size() == dailyQuests.size()) {
+            System.out.println("\n🎉 You completed all quests for today! Great job!");
+        }
     }
+
 }

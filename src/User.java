@@ -1,4 +1,5 @@
 import java.util.*;
+
 public class User {
     private String username;
     private String pass;
@@ -22,5 +23,30 @@ public class User {
 
     public int getLevel() {
         return level;
+    }
+
+    public void increaseLevel(int amount) {
+        this.level += amount;
+    }
+
+    public ArrayList<Pet> getPets() {
+        return pets;
+    }
+
+    public void addPet(Pet pet) {
+        pets.add(pet);
+    }
+
+    public void removePet(Pet pet) {
+        pets.remove(pet);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", level=" + level +
+                ", pets=" + pets +
+                '}';
     }
 }

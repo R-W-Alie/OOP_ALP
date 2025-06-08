@@ -4,7 +4,7 @@ public abstract class Pet {
     protected String name;
     protected int hp;
     protected String[] sentences;
-    private Random rand = new Random();
+    private static final Random rand = new Random();
 
     public Pet(String name, int hp, String[] sentences) {
         this.name = name;
@@ -16,6 +16,11 @@ public abstract class Pet {
         return this.name;
     }
 
+    @Override
+    public String toString() {
+        return name + " (HP: " + hp + ")";
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -25,7 +30,7 @@ public abstract class Pet {
     }
 
     public void setHp(int hp) {
-        this.hp = hp;
+        this.hp = Math.max(0, hp);
     }
 
     public String[] getSentences() {
@@ -38,7 +43,7 @@ public abstract class Pet {
 
     public void interact() {
         if (sentences != null && sentences.length > 0) {
-            int index = rand.nextInt(sentences.length); 
+            int index = rand.nextInt(sentences.length);
             System.out.println(sentences[index]);
         } else {
             System.out.println("...");
