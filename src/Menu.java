@@ -212,4 +212,8 @@ public class Menu {
     public void doQuest(User user) {
         // ini dia display quest yang bakal dilakukan
     }
+<<<<<<< Updated upstream
 }
+=======
+}
+>>>>>>> Stashed changes
