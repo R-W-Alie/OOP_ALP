@@ -1,13 +1,14 @@
 // 🦎
 public class Lizard extends Pet {
+    private static final String[] lizard_sentences = {
+        "The lizard basks in the sun.",
+        "The lizard darts across a rock.",
+        "The lizard's tail twitches.",
+        "The lizard blinks slowly."
+    };
 
     public Lizard(String name, int hp) {
-        super(name, hp, new String[]{
-            "The lizard flicks its tongue quickly.",
-            "The lizard climbs up a warm rock.",
-            "The lizard basks under the sun.",
-            "The lizard scurries across the ground."
-        });
+        super(name, hp, lizard_sentences, "🦎");
     }
 
     @Override

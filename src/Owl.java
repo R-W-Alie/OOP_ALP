@@ -1,13 +1,14 @@
 // 🦉
 public class Owl extends Pet {
+    private static final String[] owl_sentences = {
+        "The owl blinks wisely.",
+        "The owl turns its head 270°.",
+        "The owl hoots softly.",
+        "The owl watches you in silence."
+    };
 
     public Owl(String name, int hp) {
-        super(name, hp, new String[]{
-            "The owl hoots softly in the dark.",
-            "The owl turns its head nearly all the way around.",
-            "The owl watches silently from a branch.",
-            "The owl spreads its wings and glides silently."
-        });
+        super(name, hp, owl_sentences, "🦉");
     }
 
     @Override

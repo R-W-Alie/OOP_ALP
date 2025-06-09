@@ -1,13 +1,14 @@
 // 🐿️
 public class Squirrel extends Pet {
+    private static final String[] squirrel_sentences = {
+        "The squirrel nibbles on a nut.",
+        "The squirrel scurries around the tree.",
+        "The squirrel fluffs its tail.",
+        "The squirrel hides a treasure."
+    };
 
     public Squirrel(String name, int hp) {
-        super(name, hp, new String[]{
-            "The squirrel scurries up a tree.",
-            "The squirrel nibbles on an acorn.",
-            "The squirrel flicks its fluffy tail.",
-            "The squirrel hides its food in the ground."
-        });
+        super(name, hp, squirrel_sentences, "🐿️");
     }
 
     @Override

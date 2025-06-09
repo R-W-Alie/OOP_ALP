@@ -1,13 +1,14 @@
 // 🐍
 public class Snake extends Pet {
+    private static final String[] snake_sentences = {
+        "The snake slithers quietly.",
+        "The snake flicks its tongue.",
+        "The snake coils up to rest.",
+        "The snake watches everything around."
+    };
 
     public Snake(String name, int hp) {
-        super(name, hp, new String[]{
-            "The snake hisses softly.",
-            "The snake slithers across the ground.",
-            "The snake flicks its tongue rapidly.",
-            "The snake coils up and watches you carefully."
-        });
+        super(name, hp, snake_sentences, "🐍");
     }
 
     @Override

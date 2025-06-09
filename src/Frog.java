@@ -1,13 +1,14 @@
 //🐸
 public class Frog extends Pet {
+    private static final String[] frog_sentences = {
+        "The frog croaks loudly.",
+        "The frog jumps high!",
+        "The frog catches a fly.",
+        "The frog sits calmly on a lily pad."
+    };
 
     public Frog(String name, int hp) {
-        super(name, hp, new String[]{
-            "The frog lets out a loud ribbit!",
-            "The frog jumps high into the air.",
-            "The frog sits still on a lily pad.",
-            "The frog catches a fly with its tongue."
-        });
+        super(name, hp, frog_sentences, "🐸");
     }
 
     @Override

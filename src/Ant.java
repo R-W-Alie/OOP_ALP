@@ -1,12 +1,14 @@
-//🐜
-public class Ant extends Pet{
+// 🐜 Ant.java
+public class Ant extends Pet {
+    private static final String[] ant_sentences = {
+        "The ant marches diligently!",
+        "The ant is carrying a crumb.",
+        "The ant waves its antennae.",
+        "The ant forms a line with others."
+    };
+
     public Ant(String name, int hp) {
-        super(name, hp, new String[]{
-            "The ant marches diligently!",
-            "The ant is carrying a crumb.",
-            "The ant waves its antennae.",
-            "The ant forms a line with others."
-        });
+        super(name, hp, ant_sentences, "🐜");
     }
 
     @Override

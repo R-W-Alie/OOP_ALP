@@ -3,6 +3,23 @@ import java.util.*;
 public class Menu {
     private Scanner s = new Scanner(System.in);
     private String currentUser = null;
+    public class PetData {
+    public static final List<Pet> all_pets = Arrays.asList(
+        new Pet("ants", "🐜", 10),
+        new Pet("koala", "🐨", 10),
+        new Pet("monkey", "🐵", 10),
+        new Pet("squirrel", "🐿️", 10),
+        new Pet("owl", "🦉", 10),
+        new Pet("frog", "🐸", 10),
+        new Pet("bee", "🐝", 10),
+        new Pet("caterpillar", "🐛", 10),
+        new Pet("snake", "🐍", 10),
+        new Pet("spider", "🕷️", 10),
+        new Pet("lizard", "🦎", 10),
+        new Pet("bird", "🦜", 10),
+        new Pet("sloth", "🦥", 10)
+    );
+}
 
     public void welcome() {
         System.out.println("""
@@ -163,22 +180,73 @@ public class Menu {
         }
     }
 
-    public void viewAnimals(User user) {
-        // Display animals yang ada di grove
-        System.out.println("Here are the animals in your grove:");
-        // display emoji pake intejer and animalnya
-        // jadi tambah string di pet trs namain emoji
-        System.out.println();
-        System.out.println("=== MY ANIMALSS ===");
-        if (user.pets.isEmpty()) {
-            System.out.println("\nYou feel a presence missing beside you...");
-            createOrChoosePet(user);
+public void choosePet(User user) {
+    System.out.println("\nChoose an animal to add to your grove:");
+
+    // Filter pets yang BELUM dimiliki user
+    List<Pet> availablePets = new ArrayList<>();
+    for (Pet pet : allPets) {
+        boolean owned = false;
+        for (Pet p : user.pets) {
+            if (p.getId() == pet.getId()) {
+                owned = true;
+                break;
+            }
         }
-        for (int i = 0; i < user.pets.size(); i++) {
-            Pet pet = user.pets.get(i);
-            System.out.print((i + 1) + ". " + pet.getName() + " ");
+        if (!owned) {
+            availablePets.add(pet);
         }
     }
+
+    if (availablePets.isEmpty()) {
+        System.out.println("You already have all animals in your grove!");
+        return;
+    }
+
+    // Tampilkan hewan yang belum dimiliki
+    for (int i = 0; i < availablePets.size(); i++) {
+        Pet pet = availablePets.get(i);
+        System.out.printf("%d. %s %s (HP: %d)%n", i + 1, pet.getIcon(), pet.getName(), pet.getHp());
+    }
+
+    System.out.print("Enter the number of the animal you want to adopt (or 0 to cancel): ");
+    String input = s.nextLine().trim();
+    int choice;
+    try {
+        choice = Integer.parseInt(input);
+    } catch (NumberFormatException e) {
+        System.out.println("Invalid input.");
+        return;
+    }
+
+    if (choice == 0) {
+        System.out.println("No animal adopted.");
+        return;
+    }
+
+    if (choice < 1 || choice > availablePets.size()) {
+        System.out.println("Choice out of range.");
+        return;
+    }
+
+    Pet chosenPet = availablePets.get(choice - 1);
+    user.pets.add(chosenPet);
+    System.out.println("You have adopted " + chosenPet.getName() + " " + chosenPet.getIcon() + "!");
+    UserManager.saveToFile(user);  // Simpan perubahan user
+}
+
+public void viewAnimals(User user) {
+    System.out.println("\n=== My Animals ===");
+    if (user.pets.isEmpty()) {
+        System.out.println("You feel a presence missing beside you...");
+        choosePet(user);
+        return;
+    }
+    for (int i = 0; i < user.pets.size(); i++) {
+        Pet pet = user.pets.get(i);
+        System.out.printf("%d. %s %s (HP: %d)%n", i + 1, pet.getIcon(), pet.getName(), pet.getHp());
+    }
+}
 
     public void viewTree(User user) {
         // Display treenya i still need to draw

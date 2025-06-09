@@ -1,13 +1,14 @@
 // 🐝
 public class Bee extends Pet {
+    private static final String[] bee_sentences = {
+        "The bee buzzes happily.",
+        "The bee dances to show the way.",
+        "The bee collects pollen.",
+        "The bee guards the hive bravely."
+    };
 
     public Bee(String name, int hp) {
-        super(name, hp, new String[]{
-            "The bee buzzes around the flowers.",
-            "The bee collects nectar.",
-            "The bee dances to tell others where the food is.",
-            "The bee defends its hive bravely."
-        });
+        super(name, hp, bee_sentences, "🐝");
     }
 
     @Override

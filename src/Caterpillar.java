@@ -1,13 +1,14 @@
 //🐛
 public class Caterpillar extends Pet {
+    private static final String[] caterpillar_sentences = {
+        "The caterpillar wiggles along a branch.",
+        "The caterpillar munches on a leaf.",
+        "The caterpillar looks sleepy.",
+        "The caterpillar dreams of becoming a butterfly."
+    };
 
     public Caterpillar(String name, int hp) {
-        super(name, hp, new String[]{
-            "The caterpillar crawls slowly on a leaf.",
-            "The caterpillar munches on some leaves.",
-            "The caterpillar wiggles its body.",
-            "The caterpillar looks sleepy... maybe it's time to cocoon."
-        });
+        super(name, hp, caterpillar_sentences, "🐛");
     }
 
     @Override

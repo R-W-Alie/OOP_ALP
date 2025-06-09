@@ -1,13 +1,14 @@
 // 🕷️
 public class Spider extends Pet {
+    private static final String[] spider_sentences = {
+        "The spider spins a delicate web.",
+        "The spider crawls silently.",
+        "The spider hides in the corner.",
+        "The spider waits patiently for prey."
+    };
 
     public Spider(String name, int hp) {
-        super(name, hp, new String[]{
-            "The spider spins a delicate web.",
-            "The spider scuttles quickly across the floor.",
-            "The spider dangles from a silk thread.",
-            "The spider hides in a dark corner."
-        });
+        super(name, hp, spider_sentences, "🕷️");
     }
 
     @Override

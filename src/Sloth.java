@@ -1,13 +1,14 @@
 // 🦥
 public class Sloth extends Pet {
+    private static final String[] sloth_sentences = {
+        "The sloth slowly blinks at you.",
+        "The sloth hangs upside down.",
+        "The sloth takes its sweet time.",
+        "The sloth scratches lazily."
+    };
 
     public Sloth(String name, int hp) {
-        super(name, hp, new String[]{
-            "The sloth blinks slowly.",
-            "The sloth moves one paw... very... slowly.",
-            "The sloth hangs upside down from a branch.",
-            "The sloth yawns and takes another nap."
-        });
+        super(name, hp, sloth_sentences, "🦥");
     }
 
     @Override

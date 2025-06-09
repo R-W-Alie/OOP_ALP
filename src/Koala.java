@@ -1,13 +1,14 @@
 // 🐨
 public class Koala extends Pet {
+    private static final String[] koala_sentences = {
+        "The koala yawns lazily.",
+        "The koala climbs a eucalyptus tree.",
+        "The koala munches on some leaves.",
+        "The koala takes a cozy nap."
+    };
 
     public Koala(String name, int hp) {
-        super(name, hp, new String[]{
-            "The koala munches quietly on eucalyptus leaves.",
-            "The koala yawns and climbs a tree slowly.",
-            "The koala curls up for a nap.",
-            "The koala blinks sleepily and hugs the tree."
-        });
+        super(name, hp, koala_sentences, "🐨");
     }
 
     @Override
