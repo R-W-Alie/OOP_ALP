@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.ArrayList; // Pastikan ini diimpor
 
 public class UserManager {
     public static final String USER_FOLDER = "users";
@@ -16,15 +17,18 @@ public class UserManager {
             writer.write(user.getUsername() + "\n");
             writer.write(user.getPassword() + "\n");
             writer.write(user.getLevel() + "\n");
+            writer.write(user.getPoint() + "\n"); // Menyimpan point baru
 
             for (Pet pet : user.pets) {
                 String type;
+                // Perhatikan: UserManager ini masih hanya akan menyimpan Frog dan Bird.
+                // Hewan peliharaan jenis lain akan diabaikan saat menyimpan.
                 if (pet instanceof Frog) {
                     type = "Frog";
                 } else if (pet instanceof Bird) {
                     type = "Bird";
                 } else {
-                    continue;
+                    continue; // Lewati jenis hewan peliharaan yang tidak dikenali
                 }
 
                 writer.write("PET:" + type + "," + pet.getName() + "," + pet.getHp() + "\n");
@@ -45,8 +49,10 @@ public class UserManager {
             String uname = reader.readLine();
             String pass = reader.readLine();
             int level = Integer.parseInt(reader.readLine());
+            int point = Integer.parseInt(reader.readLine()); // Memuat point baru
 
-            User user = new User(uname, pass, level, point);
+            // Menggunakan konstruktor User yang diperbarui dengan 'point'
+            User user = new User(uname, pass, level, point); 
 
             String line;
             while ((line = reader.readLine()) != null) {
@@ -58,9 +64,11 @@ public class UserManager {
                         int petHp = Integer.parseInt(parts[2]);
 
                         Pet pet = switch (type) {
+                            // Perhatikan: UserManager ini masih hanya akan memuat Frog dan Bird.
+                            // Jenis hewan peliharaan lain tidak akan dimuat.
                             case "Frog" -> new Frog(petName, petHp);
                             case "Bird" -> new Bird(petName, petHp);
-                            default -> null;
+                            default -> null; // Jika jenis tidak dikenali, jangan buat objek pet
                         };
 
                         if (pet != null) {

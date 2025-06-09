@@ -72,9 +72,4 @@ public abstract class Pet {
             System.out.println("...");
         }
     }
-
-    @Override
-    public String toString() {
-        return name + " (HP: " + hp + ")";
-    }
 }

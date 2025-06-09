@@ -4,13 +4,13 @@ public class User {
     private String username;
     private String pass;
     private int level;
-    private int point;
+    private int point; // Atribut point baru
     ArrayList<Pet> pets = new ArrayList<>();
 
     public User(String username, String pass, int level, int point) {
         this.username = username;
         this.pass = pass;
-        this.level = 1;
+        this.level = level; // Diperbaiki: Menggunakan parameter level yang diteruskan
         this.point = point;
         this.pets = new ArrayList<>();
     }
@@ -27,8 +27,16 @@ public class User {
         return level;
     }
 
+    public int getPoint() { // Metode getter baru untuk point
+        return point;
+    }
+
     public void increaseLevel(int amount) {
         this.level += amount;
+    }
+
+    public void addPoint(int amount) { // Contoh metode untuk menambahkan point
+        this.point += amount;
     }
 
     public ArrayList<Pet> getPets() {
@@ -48,6 +56,7 @@ public class User {
         return "User{" +
                 "username='" + username + '\'' +
                 ", level=" + level +
+                ", point=" + point + // Ditambahkan: point di toString
                 ", pets=" + pets +
                 '}';
     }
