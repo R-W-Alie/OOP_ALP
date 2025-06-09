@@ -4,12 +4,14 @@ public class User {
     private String username;
     private String pass;
     private int level;
+    private int point;
     ArrayList<Pet> pets = new ArrayList<>();
 
-    public User(String username, String pass, int level) {
+    public User(String username, String pass, int level, int point) {
         this.username = username;
         this.pass = pass;
         this.level = 1;
+        this.point = point;
         this.pets = new ArrayList<>();
     }
 

@@ -46,7 +46,7 @@ public class UserManager {
             String pass = reader.readLine();
             int level = Integer.parseInt(reader.readLine());
 
-            User user = new User(uname, pass, level);
+            User user = new User(uname, pass, level, point);
 
             String line;
             while ((line = reader.readLine()) != null) {
