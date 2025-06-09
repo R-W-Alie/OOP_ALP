@@ -1,6 +1,7 @@
 import java.util.Random;
 
 public abstract class Pet {
+    private int id;
     protected String name;
     protected int hp;
     protected String[] sentences;
@@ -15,6 +16,10 @@ public abstract class Pet {
     }
 
     // Getters
+    public int getId() {
+        return this.id;
+    }
+
     public String getName() {
         return this.name;
     }
@@ -32,6 +37,10 @@ public abstract class Pet {
     }
 
     // Setters
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public void setName(String name) {
         this.name = name;
     }

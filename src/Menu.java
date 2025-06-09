@@ -4,7 +4,7 @@ public class Menu {
     private Scanner s = new Scanner(System.in);
     private String currentUser = null;
     public class PetData {
-    public static final List<Pet> allPets = Arrays.asList(
+        public static final List<Pet> allPets = Arrays.asList(
         new Pet("ants", 10, new String[] { // Sentences array defined explicitly here
             "The ants are marching.",
             "An ant scurries across the floor."
@@ -172,6 +172,7 @@ public class Menu {
 
         int level;
         level = 1;
+        int point = 0;
 
         User newUser = new User(username, password, level, point);
         UserManager.saveToFile(newUser);
@@ -240,133 +241,133 @@ public class Menu {
         }
     }
 
-public void choosePet(User user) {
-    System.out.println("\nChoose an animal to add to your grove:");
+    public void choosePet(User user) {
+        System.out.println("\nChoose an animal to add to your grove:");
 
-    // Filter pets yang BELUM dimiliki user
-    List<Pet> availablePets = new ArrayList<>();
-    for (Pet pet : allPets) {
-        boolean owned = false;
-        for (Pet p : user.pets) {
-            if (p.getId() == pet.getId()) {
-                owned = true;
-                break;
-            }
-        }
-        if (!owned) {
-            availablePets.add(pet);
-        }
-    }
-
-    if (availablePets.isEmpty()) {
-        System.out.println("You already have all animals in your grove!");
-        return;
-    }
-
-    // Tampilkan hewan yang belum dimiliki
-    for (int i = 0; i < availablePets.size(); i++) {
-        Pet pet = availablePets.get(i);
-        System.out.printf("%d. %s %s (HP: %d)%n", i + 1, pet.getIcon(), pet.getName(), pet.getHp());
-    }
-
-    System.out.print("Enter the number of the animal you want to adopt (or 0 to cancel): ");
-    String input = s.nextLine().trim();
-    int choice;
-    try {
-        choice = Integer.parseInt(input);
-    } catch (NumberFormatException e) {
-        System.out.println("Invalid input.");
-        return;
-    }
-
-    if (choice == 0) {
-        System.out.println("No animal adopted.");
-        return;
-    }
-
-    if (choice < 1 || choice > availablePets.size()) {
-        System.out.println("Choice out of range.");
-        return;
-    }
-
-    Pet chosenPet = availablePets.get(choice - 1);
-    user.pets.add(chosenPet);
-    System.out.println("You have adopted " + chosenPet.getName() + " " + chosenPet.getIcon() + "!");
-    UserManager.saveToFile(user);  // Simpan perubahan user
-}
-
-public void viewAnimals(User user) {
-    System.out.println("\n=== My Animals ===");
-    if (user.pets.isEmpty()) {
-        System.out.println("You feel a presence missing beside you...");
-        choosePet(user);
-        return;
-    }
-    for (int i = 0; i < user.pets.size(); i++) {
-        Pet pet = user.pets.get(i);
-        System.out.printf("%d. %s %s (HP: %d)%n", i + 1, pet.getIcon(), pet.getName(), pet.getHp());
-    }
-}
-
-    public void viewTree(User user) {
-        // Display treenya i still need to draw
-    }
-
-    public void doQuest(User user) {
-        int playerLevel = user.getLevel();
-        List<String> dailyQuests = DoQuest.get5QuestsByLevel(playerLevel); // Make sure this exists
-        Set<Integer> completedIndices = new HashSet<>();
-        System.out.println("\n🌿 Your 5 quests for today:");
-
-        while (completedIndices.size() < dailyQuests.size()) {
-            System.out.println("\nAvailable quests:");
-            for (int i = 0; i < dailyQuests.size(); i++) {
-                if (!completedIndices.contains(i)) {
-                    System.out.println((i + 1) + ". " + dailyQuests.get(i));
+        // Filter pets yang BELUM dimiliki user
+        List<Pet> availablePets = new ArrayList<>();
+        for (Pet pet : PetData.allPets) {
+            boolean owned = false;
+            for (Pet p : user.pets) {
+                if (p.getId() == pet.getId()) {
+                    owned = true;
+                    break;
                 }
             }
-
-            System.out.print("Choose a quest number to complete (or 0 to quit): ");
-            String input = s.nextLine().trim(); // use the class-level Scanner `s`
-            int choice;
-            try {
-                choice = Integer.parseInt(input);
-            } catch (NumberFormatException e) {
-                System.out.println("❌ Invalid input. Please enter a number.");
-                continue;
+            if (!owned) {
+                availablePets.add(pet);
             }
-
-            if (choice == 0) {
-                System.out.println("🌙 Quitting quests for today.");
-                mainmenu(user);
-                break;
-            }
-
-            if (choice < 1 || choice > dailyQuests.size()) {
-                System.out.println("❌ Please choose a number between 1 and " + dailyQuests.size());
-                continue;
-            }
-
-            int questIndex = choice - 1;
-
-            if (completedIndices.contains(questIndex)) {
-                System.out.println("❌ You already completed that quest today. Choose another.");
-                continue;
-            }
-
-            completedIndices.add(questIndex);
-            System.out.println("✅ Quest completed: " + dailyQuests.get(questIndex));
-
-            int reward = 1;
-            user.increaseLevel(reward);
-            System.out.println("🌟 Growth achieved! +" + reward + " level(s). Current level: " + user.getLevel());
-
-            UserManager.saveToFile(user);
         }
 
-        if (completedIndices.size() == dailyQuests.size()) {
-            System.out.println("\n🎉 You completed all quests for today! Great job!");
+        if (availablePets.isEmpty()) {
+            System.out.println("You already have all animals in your grove!");
+            return;
+        }
+
+        // Tampilkan hewan yang belum dimiliki
+        for (int i = 0; i < availablePets.size(); i++) {
+            Pet pet = availablePets.get(i);
+            System.out.printf("%d. %s %s (HP: %d)%n", i + 1, pet.getIcon(), pet.getName(), pet.getHp());
+        }
+
+        System.out.print("Enter the number of the animal you want to adopt (or 0 to cancel): ");
+        String input = s.nextLine().trim();
+        int choice;
+        try {
+            choice = Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input.");
+            return;
+        }
+
+        if (choice == 0) {
+            System.out.println("No animal adopted.");
+            return;
+        }
+
+        if (choice < 1 || choice > availablePets.size()) {
+            System.out.println("Choice out of range.");
+            return;
+        }
+
+        Pet chosenPet = availablePets.get(choice - 1);
+        user.pets.add(chosenPet);
+        System.out.println("You have adopted " + chosenPet.getName() + " " + chosenPet.getIcon() + "!");
+        UserManager.saveToFile(user);  // Simpan perubahan user
+    }
+
+    public void viewAnimals(User user) {
+        System.out.println("\n=== My Animals ===");
+        if (user.pets.isEmpty()) {
+            System.out.println("You feel a presence missing beside you...");
+            choosePet(user);
+            return;
+        }
+        for (int i = 0; i < user.pets.size(); i++) {
+            Pet pet = user.pets.get(i);
+            System.out.printf("%d. %s %s (HP: %d)%n", i + 1, pet.getIcon(), pet.getName(), pet.getHp());
         }
     }
 
-}
+        public void viewTree(User user) {
+            // Display treenya i still need to draw
+        }
+
+        public void doQuest(User user) {
+            int playerLevel = user.getLevel();
+            List<String> dailyQuests = DoQuest.get5QuestsByLevel(playerLevel); // Make sure this exists
+            Set<Integer> completedIndices = new HashSet<>();
+            System.out.println("\n🌿 Your 5 quests for today:");
+
+            while (completedIndices.size() < dailyQuests.size()) {
+                System.out.println("\nAvailable quests:");
+                for (int i = 0; i < dailyQuests.size(); i++) {
+                    if (!completedIndices.contains(i)) {
+                        System.out.println((i + 1) + ". " + dailyQuests.get(i));
+                    }
+                }
+
+                System.out.print("Choose a quest number to complete (or 0 to quit): ");
+                String input = s.nextLine().trim(); // use the class-level Scanner `s`
+                int choice;
+                try {
+                    choice = Integer.parseInt(input);
+                } catch (NumberFormatException e) {
+                    System.out.println("❌ Invalid input. Please enter a number.");
+                    continue;
+                }
+
+                if (choice == 0) {
+                    System.out.println("🌙 Quitting quests for today.");
+                    mainmenu(user);
+                    break;
+                }
+
+                if (choice < 1 || choice > dailyQuests.size()) {
+                    System.out.println("❌ Please choose a number between 1 and " + dailyQuests.size());
+                    continue;
+                }
+
+                int questIndex = choice - 1;
+
+                if (completedIndices.contains(questIndex)) {
+                    System.out.println("❌ You already completed that quest today. Choose another.");
+                    continue;
+                }
+
+                completedIndices.add(questIndex);
+                System.out.println("✅ Quest completed: " + dailyQuests.get(questIndex));
+
+                int reward = 1;
+                user.increaseLevel(reward);
+                System.out.println("🌟 Growth achieved! +" + reward + " level(s). Current level: " + user.getLevel());
+
+                UserManager.saveToFile(user);
+            }
+
+            if (completedIndices.size() == dailyQuests.size()) {
+                System.out.println("\n🎉 You completed all quests for today! Great job!");
+            }
+        }
+
+    }
