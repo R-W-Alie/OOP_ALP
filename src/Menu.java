@@ -268,7 +268,6 @@ public void viewAnimals(User user) {
 
             System.out.print("Choose a quest number to complete (or 0 to quit): ");
             String input = s.nextLine().trim(); // use the class-level Scanner `s`
-
             int choice;
             try {
                 choice = Integer.parseInt(input);
@@ -279,6 +278,7 @@ public void viewAnimals(User user) {
 
             if (choice == 0) {
                 System.out.println("🌙 Quitting quests for today.");
+                mainmenu(user);
                 break;
             }
 
